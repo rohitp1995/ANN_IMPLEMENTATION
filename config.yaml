@@ -1,0 +1,7 @@
+params:
+  validation_size: 5000
+  LOSS: sparse_categorical_crossentropy
+  METRICS: accuracy
+  OPTIMIZER: SGD
+  EPOCHS: 30
+
