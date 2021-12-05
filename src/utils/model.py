@@ -1,4 +1,6 @@
 import tensorflow as tf
+import time
+import os
 
 
 def get_model (LOSS, OPTIMIZER, METRICS):
@@ -14,3 +16,16 @@ def get_model (LOSS, OPTIMIZER, METRICS):
                           optimizer = 'SGD',metrics='accuracy')
 
     return model_clf
+
+
+def get_unique_filename(filename):
+      unique_name = time.strftime(f"%Y%m%d_%H%M%S_{filename}")
+      return unique_name
+
+
+def save_model(model, model_name, model_dir):
+    unique_filename = get_unique_filename(model_name)
+    path_to_model = os.path.join(model_dir, unique_filename)
+    model.save(path_to_model)
+
+
