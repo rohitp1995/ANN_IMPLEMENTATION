@@ -1,6 +1,6 @@
 from src.utils.common import read_config
 from src.utils.data_management import get_data
-from src.utils.model import get_model
+from src.utils.model import get_model,save_model
 import argparse
 import logging
 import os
@@ -20,6 +20,8 @@ def training(config_path):
      metrics = config['params']['METRICS']
      optimizer = config['params']['OPTIMIZER']
      epochs = config['params']['EPOCHS']
+     model_name =config['model']['MODEL_NAME']
+     model_dir = config['model']['MODEL_DIR']
 
      (X_train, y_train), (X_valid, y_valid), (X_test, y_test) = get_data(validation_size)
      logging.info("Mnist data loaded")
@@ -29,11 +31,13 @@ def training(config_path):
 
      history = model.fit(X_train,y_train,validation_data = (X_valid, y_valid), epochs =epochs)
 
+     save_model(model,model_name,model_dir)
+
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
 
-    args.add_argument("--config", "-c", default="config.yaml")
+    args.add_argument("--config", "-c", default="ANN_IMPLEMENTATION/config.yaml")
 
     parsed_args = args.parse_args()
     logging.info(">>>>> starting training >>>>>")

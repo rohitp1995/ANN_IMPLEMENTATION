@@ -5,3 +5,8 @@ params:
   OPTIMIZER: SGD
   EPOCHS: 30
 
+
+model:
+  MODEL_NAME: model.h5
+  MODEL_DIR : model
+
